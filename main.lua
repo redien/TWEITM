@@ -1,3 +1,4 @@
+require 'AnAL'
 require 'building'
 require 'player'
 require 'background'
@@ -82,10 +83,12 @@ function love.keypressed(key, unicode)
 	if 'escape' == key then
 		love.event.push('quit')
 	end
+
+	player:keypressed(key, unicode)
 end
 
 function love.keyreleased(key, unicode)
-
+	player:keyreleased(key, unicode)
 end
 
 function love.mousepressed(x, y, button)
