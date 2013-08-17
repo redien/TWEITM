@@ -44,10 +44,26 @@ end
 
 local player_animation_start, player_animation_end
 
+local time_speed = 1.0
+local slow_timer = 0.0
+function slowDownTime()
+	time_speed = 0.5
+	slow_timer = 10
+end
+
 function love.update(dt)
+	
+	if slow_timer ~= 0 then
+		slow_timer = slow_timer - dt
+	end
+
+	if slow_timer < 0 then
+		slow_timer = 0
+		time_speed = 1.0
+	end
 
 	background:update(st)
-	building:update(dt, player)
+	building:update(dt, player, slowDownTime)
   player:update(dt, building:isMoving())
 
 	if building:isMoving() then
@@ -59,7 +75,7 @@ function love.update(dt)
 	end
 
 	if remainingTime - dt >= 0 then
-		remainingTime = remainingTime - dt
+		remainingTime = remainingTime - dt * time_speed
 	else
 		game.state = states.over
 	end

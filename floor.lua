@@ -29,16 +29,16 @@ function Floor()
 			stairs_image = love.graphics.newImage("sep.stairs.png")
 		end
 
-		if math.random(5) == 1 then		
-			local beer = Beer(math.random(self.width), self.height - 32)
+		if math.random(3) == 1 then		
+			local beer = Beer(math.random(self.width - 50), self.height - 32)
 			beer:load(...)
 			beers[#beers + 1] = beer
 		end
 	end
 
-	function floor:update(dt, player)
+	function floor:update(dt, player, slowDownTime)
 		for _, beer in pairs(beers) do
-			beer:update(dt, player)
+			beer:update(dt, player, slowDownTime)
 		end
 	end
 	

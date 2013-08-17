@@ -28,7 +28,7 @@ function Building(number_of_floors)
 		animation_offset_per_second = 0
 	end
 
-	function building:update(dt, player)
+	function building:update(dt, player, slowDownTime)
 		current_floor_offset_y = current_floor_offset_y + dt * animation_offset_per_second
 		if current_floor_offset_y > target_floor_offset_y then
 			current_floor_offset_y = target_floor_offset_y
@@ -36,7 +36,7 @@ function Building(number_of_floors)
 		end
 		
 		if building.currentFloor < number_of_floors then
-			floors[number_of_floors - building.currentFloor]:update(dt, player)
+			floors[number_of_floors - building.currentFloor]:update(dt, player, slowDownTime)
 		end
 	end
 

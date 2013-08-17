@@ -10,10 +10,11 @@ function Beer(x, y)
 		taken_sound = love.audio.newSource("powerup.ogg", static)
 	end
 
-	function beer:update(dt, player)
+	function beer:update(dt, player, slowDownTime)
 		if not taken and player.position.x > x - 6 and player.position.x < x + beer_image:getWidth() - 6 then
 			taken = true
 			taken_sound:play()
+			slowDownTime()
 		end
 	end
 	
