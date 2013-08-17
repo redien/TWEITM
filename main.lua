@@ -19,7 +19,7 @@ local background = Background()
 local remainingTime = 120
 
 local offsetX = 90
-local offsetY = 100
+local offsetY = 129
 
 local scale = 2
 
@@ -39,7 +39,7 @@ local player_animation_start, player_animation_end
 function love.update(dt)
 
 	background:update(st)
-	building:update(dt)
+	building:update(dt, player)
   player:update(dt, building:isMoving())
 
 	if building:isMoving() then

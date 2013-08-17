@@ -1,11 +1,15 @@
 
+require 'beer'
+
 function Floor()
 	local floor = {}
 	local background_image, elevator_door_image, stairs_image
 	local door_x, door_y, door_width
 	
+	local beers = {}
+	
 	function floor:load(...)
-		background_image = love.graphics.newImage("bigroom.png")
+		background_image = love.graphics.newImage("Wallpaper.png")
 		
 		self.height = background_image:getHeight()
 		self.width = background_image:getWidth()
@@ -24,10 +28,18 @@ function Floor()
 		if self.hasStairs then
 			stairs_image = love.graphics.newImage("sep.stairs.png")
 		end
+
+		if math.random(5) == 1 then		
+			local beer = Beer(math.random(self.width), self.height - 32)
+			beer:load(...)
+			beers[#beers + 1] = beer
+		end
 	end
 
-	function floor:update(dt)
-		
+	function floor:update(dt, player)
+		for _, beer in pairs(beers) do
+			beer:update(dt, player)
+		end
 	end
 	
 	function floor:draw(offset_x, offset_y)
@@ -42,6 +54,11 @@ function Floor()
 			if self.hasStairs then
 				love.graphics.draw(stairs_image, offset_x + 20, offset_y - 2)
 			end
+			
+			for _, beer in pairs(beers) do
+				beer:draw(offset_x, offset_y)
+			end
+			
 		love.graphics.pop()
 	end
 

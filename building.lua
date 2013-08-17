@@ -28,12 +28,14 @@ function Building(number_of_floors)
 		animation_offset_per_second = 0
 	end
 
-	function building:update(dt)
+	function building:update(dt, player)
 		current_floor_offset_y = current_floor_offset_y + dt * animation_offset_per_second
 		if current_floor_offset_y > target_floor_offset_y then
 			current_floor_offset_y = target_floor_offset_y
 			animation_offset_per_second = 0
 		end
+		
+		floors[number_of_floors - building.currentFloor]:update(dt, player)
 	end
 
 	function building:draw(offset_x, offset_y)
