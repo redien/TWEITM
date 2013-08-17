@@ -154,6 +154,7 @@ end
 function game.drawStateLost()
 	love.graphics.clear()
 	love.graphics.push()
+		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(lost_image, 0, 0, 0, 2, 2)
 	love.graphics.pop()
 end
@@ -161,6 +162,7 @@ end
 function game.drawStateWon()
 	love.graphics.clear()
 	love.graphics.push()
+		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(won_image, 0, 0, 0, 2, 2)
 	love.graphics.pop()
 end
