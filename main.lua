@@ -8,15 +8,13 @@ local app = {
 }
 
 local building = Building(10)
-local player = {}
+local player = Player()
 
 local offsetX = love.graphics.getWidth() / 2 - 200
 local offsetY = love.graphics.getHeight() - 300
 
 function love.load(...)
 	building:load(...)
-
-	player = Player()
   player:load()
 end
 
@@ -27,7 +25,7 @@ end
 
 function love.draw()
 	building:draw(offsetX, offsetY)
-  player:draw(offsetY, offsetY)
+  player:draw(offsetY, offsetY + 200)
 end
 
 function love.focus(focused)
@@ -39,7 +37,9 @@ function love.quit()
 end
 
 function love.keypressed(key, unicode)
-
+	if 'escape' == key then
+		love.event.push('quit')
+	end
 end
 
 function love.keyreleased(key, unicode)

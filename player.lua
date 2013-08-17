@@ -1,9 +1,10 @@
 function Player()
   local player = {}
-  local delta = 0
 
   function player:load(...)
-    self.speed = 50
+		self.image = love.graphics.newImage('player1.png')
+
+    self.speed = 2
     self.position = {
       x = 1,
       y = 1
@@ -11,23 +12,21 @@ function Player()
   end
 
   function player:update(dt)
-    if delta < (1 / self.speed) then
-      delta = delta + dt
-    end
-
     if love.keyboard.isDown('left') then
-      self.position.x = self.position.x - 1
+      self.position.x = self.position.x - self.speed
     elseif love.keyboard.isDown('right') then
-      self.position.x = self.position.x + 1
+      self.position.x = self.position.x + self.speed
     end
-
-    delta = 0
   end
 
   function player:draw(offset_x, offset_y)
     love.graphics.push()
-      love.graphics.setColor(0, 255, 255)
-      love.graphics.rectangle("fill", self.position.x * 10 + offset_x, self.position.y * 10 + offset_y, 10, 10)
+      love.graphics.setColor(255, 255, 255)
+      love.graphics.draw(
+				self.image,
+				self.position.x + offset_x,
+				self.position.y + offset_y - self.image:getHeight()
+			)
     love.graphics.pop()
   end
 
