@@ -52,7 +52,7 @@ function Floor()
 		
 		if floor.hasStairs then
 			if x > 140 and x < 170 then
-				return true, 155, 25
+				return true, 155, 25	
 			end
 		end
 		
