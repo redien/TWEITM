@@ -2,6 +2,9 @@ require 'building'
 require 'player'
 require 'background'
 
+math.randomseed( os.time() )
+math.random(); math.random(); math.random()
+
 local states = { start = 0, play = 1, over = 2 }
 
 local game = {
@@ -9,7 +12,7 @@ local game = {
 	state = states.start
 }
 
-local building = Building(10)
+local building = Building(60)
 local player = Player()
 local background = Background()
 
@@ -69,10 +72,11 @@ end
 
 function love.keypressed(key, unicode)
 	if 'up' == key then
-		local can_move_up
-		can_move_up, player_animation_start, player_animation_end = building:canMoveUpAt(player.position.x, player.position.y)
+		local can_move_up, animation_start, animation_end = building:canMoveUpAt(player.position.x, player.position.y)
 		if can_move_up then
 			building:moveUp()
+			player_animation_start = animation_start
+			player_animation_end = animation_end
 		end
 	end
 	if 'escape' == key then

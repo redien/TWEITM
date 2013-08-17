@@ -52,7 +52,7 @@ function Building(number_of_floors)
 	
 	function building:canMoveUpAt(x, y)
 		if building.currentFloor < number_of_floors and not self:isMoving() then
-			return floors[building.currentFloor + 1]:canMoveUpAt(x, y)
+			return floors[number_of_floors - building.currentFloor]:canMoveUpAt(x, y)
 		end
 		
 		return false
