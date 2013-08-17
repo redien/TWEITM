@@ -12,10 +12,12 @@ local player = Player()
 
 local offsetX = 100
 local offsetY = 100
+local scale = 2
 
 function love.load(...)
 	building:load(...)
   player:load()
+	player:setLimit(168, 100)
 end
 
 function love.update(dt)
@@ -24,9 +26,9 @@ function love.update(dt)
 end
 
 function love.draw()
-  love.graphics.scale(2, 2)
+  love.graphics.scale(scale, scale)
 	building:draw(offsetX, offsetY)
-  player:draw(offsetY, offsetY + 200)
+  player:draw(offsetY, offsetY)
 end
 
 function love.focus(focused)

@@ -10,7 +10,7 @@ function Floor()
 		
 		floor.height = background_image:getHeight()
 		floor.width = background_image:getWidth()
-		
+
 		floor.hasElevatorDoor = true
 		if floor.hasElevatorDoor then
 			elevator_door_image = love.graphics.newImage("elevatordoor.png")

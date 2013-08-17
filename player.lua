@@ -6,15 +6,19 @@ function Player()
 
     self.speed = 2
     self.position = {
-      x = 1,
-      y = 1
+      x = 0,
+      y = 0
     }
+		self.limit = {
+			x = 0,
+			y = 0
+		}
   end
 
   function player:update(dt)
-    if love.keyboard.isDown('left') then
+    if love.keyboard.isDown('left') and 0 < self.position.x then
       self.position.x = self.position.x - self.speed
-    elseif love.keyboard.isDown('right') then
+    elseif love.keyboard.isDown('right') and (self.limit.x - self.image:getWidth()) > self.position.x then
       self.position.x = self.position.x + self.speed
     end
   end
@@ -25,13 +29,18 @@ function Player()
       love.graphics.draw(
 				self.image,
 				self.position.x + offset_x,
-				self.position.y + offset_y - self.image:getHeight()
+				self.position.y + offset_y + self.limit.y - self.image:getHeight()
 			)
     love.graphics.pop()
   end
 
   function player:keypressed(key, unicode)
   end
+
+	function player:setLimit(x, y)
+		self.limit.x = x
+		self.limit.y = y
+	end
 
   return player
 end
