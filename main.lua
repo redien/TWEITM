@@ -124,7 +124,8 @@ function game.drawGui()
 	love.graphics.push()
 		love.graphics.setColor(85, 190, 240)
 		love.graphics.print('Time: ' .. string.format('%.1f', remainingTime), 2, 2)
-		love.graphics.print('FPS: ' .. love.timer.getFPS(), 2, 22)
+		love.graphics.print('Floor: ' .. building:getCurrentFloor(), 2, 18)
+		love.graphics.print('FPS: ' .. love.timer.getFPS(), 2, 34)
 	love.graphics.pop()
 end
 
