@@ -6,7 +6,10 @@ function Building(number_of_floors)
 	local floors = {}
 	local speed = 1.0
 
-	local current_floor_offset_y, target_floor_offset_y, animation_offset_per_second
+	local current_floor_offset_y,
+		  target_floor_offset_y,
+		  animation_offset_per_second,
+		  start_animation_offset_y
 	
 	local next_floor_sound
 	
@@ -44,16 +47,23 @@ function Building(number_of_floors)
 		building.currentFloor = building.currentFloor + 1
 		target_floor_offset_y = -(number_of_floors - building.currentFloor) * floors[1].height
 		animation_offset_per_second = speed * (target_floor_offset_y - current_floor_offset_y)
+		start_animation_offset_y = current_floor_offset_y
 	end
 	
 	function building:canMoveUpAt(x, y)
 		if building.currentFloor < number_of_floors and not self:isMoving() then
 			return floors[building.currentFloor + 1]:canMoveUpAt(x, y)
 		end
+		
+		return false
 	end
-	
+
 	function building:isMoving()
 		return target_floor_offset_y ~= current_floor_offset_y
+	end
+	
+	function building:moveProgress()
+		return math.abs(current_floor_offset_y - start_animation_offset_y) / (target_floor_offset_y - start_animation_offset_y)
 	end
 	
 	function building:getLimit()

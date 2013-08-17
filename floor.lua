@@ -21,8 +21,7 @@ function Floor()
 		
 		floor.hasStairs = true
 		if floor.hasStairs then
-			stairs_image = love.graphics.newImage("elevatordoor.png")
-			
+			stairs_image = love.graphics.newImage("sep.stairs.png")
 		end
 	end
 
@@ -39,7 +38,7 @@ function Floor()
 			end
 
 			if floor.hasStairs then
-				love.graphics.draw(stairs_image, offset_x + 0, offset_y + 0)
+				love.graphics.draw(stairs_image, offset_x + 20, offset_y - 2)
 			end
 		love.graphics.pop()
 	end
@@ -47,7 +46,13 @@ function Floor()
 	function floor:canMoveUpAt(x, y)
 		if floor.hasElevatorDoor then
 			if x > door_x - 6 and x < door_x + door_width - 6 then
-				return true
+				return true, door_x + 2, door_x + 2
+			end
+		end
+		
+		if floor.hasStairs then
+			if x > 140 and x < 170 then
+				return true, 155, 25
 			end
 		end
 		

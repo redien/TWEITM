@@ -15,12 +15,14 @@ function Player()
 		}
   end
 
-  function player:update(dt)
-    if love.keyboard.isDown('left') and 0 < self.position.x then
-      self.position.x = self.position.x - self.speed
-    elseif love.keyboard.isDown('right') and (self.limit.x - self.image:getWidth()) > self.position.x then
-      self.position.x = self.position.x + self.speed
-    end
+  function player:update(dt, freeze_controls)
+  	if not freeze_controls then
+		if love.keyboard.isDown('left') and 0 < self.position.x then
+		  self.position.x = self.position.x - self.speed
+		elseif love.keyboard.isDown('right') and (self.limit.x - self.image:getWidth()) > self.position.x then
+		  self.position.x = self.position.x + self.speed
+		end
+	end
   end
 
   function player:draw(offset_x, offset_y)

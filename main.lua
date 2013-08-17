@@ -25,10 +25,17 @@ function love.load(...)
 	player:setLimit(building:getLimit())
 end
 
+local player_animation_start, player_animation_end
+
 function love.update(dt)
+
 	background:update(st)
 	building:update(dt)
-  player:update(dt)
+  player:update(dt, building:isMoving())
+
+	if building:isMoving() then
+		player.position.x = player_animation_start + (player_animation_end - player_animation_start) * building:moveProgress()
+	end
 end
 
 function love.draw()
@@ -52,7 +59,9 @@ function love.keypressed(key, unicode)
 		love.event.push('quit')
 	end
 	if 'up' == key then
-		if building:canMoveUpAt(player.position.x, player.position.y) then
+		local can_move_up
+		can_move_up, player_animation_start, player_animation_end = building:canMoveUpAt(player.position.x, player.position.y)
+		if can_move_up then
 			building:moveUp()
 		end
 	end
