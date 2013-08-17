@@ -35,8 +35,9 @@ function Building(number_of_floors)
 			animation_offset_per_second = 0
 		end
 		
-		if building.currentFloor < number_of_floors then
-			floors[number_of_floors - building.currentFloor]:update(dt, player, slowDownTime)
+		for i = 1, #floors do
+			local isCurrentFloor = (#floors - i) == building.currentFloor and not self:isMoving()
+			floors[i]:update(dt, player, slowDownTime, isCurrentFloor)
 		end
 	end
 

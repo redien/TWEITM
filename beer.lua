@@ -6,12 +6,22 @@ function Beer(x, y)
 	local taken_sound
 	
 	function beer:load(...)
-		beer_image = love.graphics.newImage('beer.png')
+		if math.random(2) == 1 then
+			beer_image = love.graphics.newImage('beer.png')
+		else
+			beer_image = love.graphics.newImage('coffee.png')
+		end
 		taken_sound = love.audio.newSource("powerup.ogg", static)
 	end
 
-	function beer:update(dt, player, slowDownTime)
-		if not taken and player.position.x > x - 6 and player.position.x < x + beer_image:getWidth() - 6 then
+	local float_offset_y = 0.0
+	local time = 0.0
+	function beer:update(dt, player, slowDownTime, isCurrentFloor)
+		time = time + dt
+		
+		float_offset_y = math.sin(time * 4) * 3
+		
+		if not taken and isCurrentFloor and player.position.x > x - 6 and player.position.x < x + beer_image:getWidth() - 6 then
 			taken = true
 			taken_sound:play()
 			slowDownTime()
@@ -20,7 +30,7 @@ function Beer(x, y)
 	
 	function beer:draw(offset_x, offset_y)
 		if not taken then
-			love.graphics.draw(beer_image, offset_x + x, offset_y + y)
+			love.graphics.draw(beer_image, offset_x + x, offset_y + y + float_offset_y)
 		end
 	end
 	

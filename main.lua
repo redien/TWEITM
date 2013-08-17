@@ -13,7 +13,9 @@ local game = {
 	state = states.start
 }
 
-local number_of_floors = 60
+local time_scale = 2.0
+
+local number_of_floors = 80 / time_scale
 
 local building = Building(number_of_floors)
 local player = Player()
@@ -48,7 +50,7 @@ local time_speed = 1.0
 local slow_timer = 0.0
 function slowDownTime()
 	time_speed = 0.5
-	slow_timer = 10
+	slow_timer = 5
 end
 
 function love.update(dt)
@@ -69,15 +71,17 @@ function love.update(dt)
 	if building:isMoving() then
 		player.position.x = player_animation_start + (player_animation_end - player_animation_start) * building:moveProgress()
 	else 
-		if building.currentFloor == number_of_floors then
+		if building.currentFloor == number_of_floors and game.state ~= states.over then
 			game.state = states.won
 		end
 	end
 
 	if remainingTime - dt >= 0 then
-		remainingTime = remainingTime - dt * time_speed
+		remainingTime = remainingTime - dt * time_scale * time_speed
 	else
-		game.state = states.over
+		if game.state ~= states.won then
+			game.state = states.over
+		end
 	end
 end
 
@@ -166,7 +170,7 @@ function game.drawGui()
 	love.graphics.push()
 		love.graphics.setColor(85, 190, 240)
 		love.graphics.print('Time: ' .. string.format('%.1f', remainingTime), 2, 2)
-		love.graphics.print('Floor: ' .. building:getCurrentFloor(), 2, 18)
+		love.graphics.print('Floors left: ' .. number_of_floors - building:getCurrentFloor(), 2, 18)
 		love.graphics.print('FPS: ' .. love.timer.getFPS(), 2, 34)
 	love.graphics.pop()
 end
