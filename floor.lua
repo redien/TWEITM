@@ -8,6 +8,7 @@ function Floor()
 		background_image:setFilter('linear', 'nearest')
 		
 		floor.height = background_image:getHeight()
+		floor.width = background_image:getWidth()
 	end
 
 	function floor:update(dt)
