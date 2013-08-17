@@ -68,7 +68,7 @@ function love.update(dt)
 	if building:isMoving() then
 		player.position.x = player_animation_start + (player_animation_end - player_animation_start) * building:moveProgress()
 	else 
-		if building.currentFloor == number_of_floors and game.state ~= states.over then
+		if building.currentFloor == number_of_floors and game.state ~= states.lost then
 			game.state = states.won
 		end
 	end
@@ -77,7 +77,7 @@ function love.update(dt)
 		remainingTime = remainingTime - dt * time_scale * time_speed
 	else
 		if game.state ~= states.won then
-			game.state = states.over
+			game.state = states.lost
 		end
 	end
 end
