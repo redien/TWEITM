@@ -1,4 +1,6 @@
 
+local scale = 2
+
 function Floor()
 	local floor = {}
 	local background_image
@@ -6,6 +8,8 @@ function Floor()
 	function floor:load(...)
 		background_image = love.graphics.newImage("room-2.png")
 		background_image:setFilter('linear', 'nearest')
+		
+		floor.height = background_image:getHeight() * scale
 	end
 
 	function floor:update(dt)
@@ -13,7 +17,7 @@ function Floor()
 	end
 	
 	function floor:draw(offset_x, offset_y)
-		love.graphics.draw(background_image, offset_x, offset_y, 0, 2, 2)
+		love.graphics.draw(background_image, offset_x, offset_y, 0, scale, scale)
 	end
 	
 	return floor

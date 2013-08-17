@@ -1,21 +1,21 @@
 
-require 'floor'
+require 'building'
 
-local floor = Floor()
+local building = Building(10)
 
 local offsetX = love.graphics.getWidth() / 2 - 200
-local offsetY = 100
+local offsetY = love.graphics.getHeight() - 300
 
 function love.load(...)
-	floor:load(...)
+	building:load(...)
 end
 
 function love.update(dt)
-	floor:update(dt)
+	building:update(dt)
 end
 
 function love.draw()
-	floor:draw(offsetX, offsetY)
+	building:draw(offsetX, offsetY)
 end
 
 function love.focus(focused)
