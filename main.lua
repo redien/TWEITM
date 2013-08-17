@@ -5,16 +5,20 @@ require 'background'
 math.randomseed( os.time() )
 math.random(); math.random(); math.random()
 
-local states = { start = 0, play = 1, over = 2 }
+local states = { start = 0, play = 1, over = 2, won = 3 }
 
 local game = {
 	version = 0.1,
 	state = states.start
 }
 
-local building = Building(60)
+local number_of_floors = 60
+
+local building = Building(number_of_floors)
 local player = Player()
 local background = Background()
+
+local won_image, lost_image
 
 local remainingTime = 120
 
@@ -32,6 +36,9 @@ function love.load(...)
 	background:load(...)
   player:load(...)
 	player:setLimit(building:getLimit())
+	
+	won_image = love.graphics.newImage("Youwonthegame.png")
+	lost_image = love.graphics.newImage("youlostthegame.png")
 end
 
 local player_animation_start, player_animation_end
@@ -44,6 +51,10 @@ function love.update(dt)
 
 	if building:isMoving() then
 		player.position.x = player_animation_start + (player_animation_end - player_animation_start) * building:moveProgress()
+	else 
+		if building.currentFloor == number_of_floors then
+			game.state = states.won
+		end
 	end
 
 	if remainingTime - dt >= 0 then
@@ -59,6 +70,8 @@ function love.draw()
 		game.drawGui()
 	elseif states.over == game.state then
 		game.drawStateOver()
+	elseif states.won == game.state then
+		game.drawStateWon()
 	end
 end
 
@@ -119,8 +132,14 @@ end
 function game.drawStateOver()
 	love.graphics.clear()
 	love.graphics.push()
-		love.graphics.setColor(85, 190, 240)
-		love.graphics.printf('GAME OVER', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
+		love.graphics.draw(lost_image, 0, 0, 0, 2, 2)
+	love.graphics.pop()
+end
+
+function game.drawStateWon()
+	love.graphics.clear()
+	love.graphics.push()
+		love.graphics.draw(won_image, 0, 0, 0, 2, 2)
 	love.graphics.pop()
 end
 
