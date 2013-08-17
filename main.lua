@@ -1,21 +1,34 @@
-
 require 'floor'
+require 'player'
 
-local floor = Floor()
+local app = {
+	version = 0.1,
+	showdebug = false,
+	showhelp = false
+}
+
+local floor = {}
+local player = {}
 
 local offsetX = love.graphics.getWidth() / 2 - 200
 local offsetY = 100
 
 function love.load(...)
+	floor = Floor()
 	floor:load(...)
+
+	player = Player()
+  player:load()
 end
 
 function love.update(dt)
 	floor:update(dt)
+  player:update(dt)
 end
 
 function love.draw()
 	floor:draw(offsetX, offsetY)
+  player:draw(offsetY, offsetY)
 end
 
 function love.focus(focused)
