@@ -3,7 +3,6 @@ function Player()
 	local playerImages = {}
 
   function player:load(...)
-		playerImages.default = love.graphics.newImage('player1.png')
 		playerImages.ani_left = love.graphics.newImage('player_left.png')
 		playerImages.ani_right = love.graphics.newImage('player_right.png')
 
