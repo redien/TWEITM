@@ -17,7 +17,10 @@ function Floor()
 	end
 	
 	function floor:draw(offset_x, offset_y)
-		love.graphics.draw(background_image, offset_x, offset_y, 0, scale, scale)
+		love.graphics.push()
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.draw(background_image, offset_x, offset_y, 0, 2, 2)
+		love.graphics.pop()
 	end
 	
 	return floor
