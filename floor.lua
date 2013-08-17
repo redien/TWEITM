@@ -9,7 +9,9 @@ function Floor()
 	local beers = {}
 	
 	function floor:load(...)
-		background_image = love.graphics.newImage("Wallpaper.png")
+		local index = math.random(5)
+		local files = {'Wallpaper.png','Wallpaper2.png','Wallpaper3.png','Wallpaper4.png','Wallpaper5.png'}
+		background_image = love.graphics.newImage(files[index])
 		
 		self.height = background_image:getHeight()
 		self.width = background_image:getWidth()
