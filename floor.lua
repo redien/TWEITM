@@ -30,15 +30,15 @@ function Floor()
 		end
 
 		if math.random(3) == 1 then		
-			local beer = Beer(math.random(self.width - 50), self.height - 32)
+			local beer = Beer(math.random(self.width - 50), self.height - 42)
 			beer:load(...)
 			beers[#beers + 1] = beer
 		end
 	end
 
-	function floor:update(dt, player, slowDownTime)
+	function floor:update(dt, player, slowDownTime, isCurrentFloor)
 		for _, beer in pairs(beers) do
-			beer:update(dt, player, slowDownTime)
+			beer:update(dt, player, slowDownTime, isCurrentFloor)
 		end
 	end
 	
@@ -70,7 +70,7 @@ function Floor()
 		end
 		
 		if self.hasStairs then
-			if x > 140 and x < 170 then
+			if x > 130 and x < 170 then
 				return true, 155, 25	
 			end
 		end
