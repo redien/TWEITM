@@ -69,6 +69,10 @@ function Building(number_of_floors)
 	function building:getLimit()
 		return floors[1].width, floors[1].height
 	end
+
+	function building:getCurrentFloor()
+		return building.currentFloor
+	end
 	
 	return building
 end
