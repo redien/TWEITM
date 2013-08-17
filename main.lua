@@ -1,5 +1,6 @@
 require 'building'
 require 'player'
+require 'background'
 
 local app = {
 	version = 0.1,
@@ -9,26 +10,33 @@ local app = {
 
 local building = Building(10)
 local player = Player()
+local background = Background()
 
-local offsetX = 100
+local offsetX = 90
 local offsetY = 100
 local scale = 2
 
+love.graphics.setDefaultImageFilter('linear', 'nearest')
+
 function love.load(...)
 	building:load(...)
+	background:load(...)
   player:load()
-	player:setLimit(168, 100)
+	player:setLimit(building:getLimit())
 end
 
 function love.update(dt)
+	background:update(st)
 	building:update(dt)
   player:update(dt)
 end
 
 function love.draw()
   love.graphics.scale(scale, scale)
+
+	background:draw(offsetX, offsetY)
 	building:draw(offsetX, offsetY)
-  player:draw(offsetY, offsetY)
+  player:draw(offsetX, offsetY)
 end
 
 function love.focus(focused)

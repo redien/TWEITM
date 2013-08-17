@@ -47,7 +47,17 @@ function Building(number_of_floors)
 	end
 	
 	function building:canMoveUpAt(x, y)
-		return floors[building.currentFloor + 1]:canMoveUpAt(x, y)
+		if building.currentFloor < number_of_floors and not self:isMoving() then
+			return floors[building.currentFloor + 1]:canMoveUpAt(x, y)
+		end
+	end
+	
+	function building:isMoving()
+		return target_floor_offset_y ~= current_floor_offset_y
+	end
+	
+	function building:getLimit()
+		return floors[1].width, floors[1].height
 	end
 	
 	return building
