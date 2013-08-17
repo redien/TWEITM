@@ -8,12 +8,16 @@ function Building(number_of_floors)
 
 	local current_floor_offset_y, target_floor_offset_y, animation_offset_per_second
 	
+	local next_floor_sound
+	
 	function building:load(...)
 		for i = 1, number_of_floors do
 			local floor = Floor()
 			floor:load(...)
 			floors[#floors + 1] = floor
 		end
+		
+		next_floor_sound = love.audio.newSource("next_floor.ogg", static)
 		
 		building.currentFloor = 0
 		current_floor_offset_y = -number_of_floors * floors[1].height
@@ -36,9 +40,14 @@ function Building(number_of_floors)
 	end
 	
 	function building:moveUp()
+		next_floor_sound:play()
 		building.currentFloor = building.currentFloor + 1
 		target_floor_offset_y = -(number_of_floors - building.currentFloor) * floors[1].height
 		animation_offset_per_second = speed * (target_floor_offset_y - current_floor_offset_y)
+	end
+	
+	function building:canMoveUpAt(x, y)
+		return floors[building.currentFloor + 1]:canMoveUpAt(x, y)
 	end
 	
 	return building

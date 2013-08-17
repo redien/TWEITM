@@ -42,7 +42,9 @@ function love.keypressed(key, unicode)
 		love.event.push('quit')
 	end
 	if 'up' == key then
-		building:moveUp()
+		if building:canMoveUpAt(player.position.x, player.position.y) then
+			building:moveUp()
+		end
 	end
 end
 
