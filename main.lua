@@ -1,13 +1,21 @@
-function love.load(...)
 
+require 'floor'
+
+local floor = Floor()
+
+local offsetX = love.graphics.getWidth() / 2 - 200
+local offsetY = 100
+
+function love.load(...)
+	floor:load(...)
 end
 
 function love.update(dt)
-
+	floor:update(dt)
 end
 
 function love.draw()
-
+	floor:draw(offsetX, offsetY)
 end
 
 function love.focus(focused)
