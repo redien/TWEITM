@@ -1,6 +1,6 @@
 function love.conf(t)
   t.title = "TWEITM"
-  t.author = "Andree Neemann, Jesper Oskarsson, Alexander Wenzel")
+  t.author = "Andree Neemann, Jesper Oskarsson, Alexander Wenzel"
   t.url = "https://github.com/redien/TWEITM"
   t.screen.width = 800
   t.screen.height = 520

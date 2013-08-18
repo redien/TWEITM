@@ -10,7 +10,7 @@ function Floor()
 	
 	function floor:load(...)
 		local index = math.random(5)
-		local files = {'Wallpaper.png','Wallpaper2.png','Wallpaper3.png','Wallpaper4.png','Wallpaper5.png'}
+		local files = {'gfx/Wallpaper.png','gfx/Wallpaper2.png','gfx/Wallpaper3.png','gfx/Wallpaper4.png','gfx/Wallpaper5.png'}
 		background_image = love.graphics.newImage(files[index])
 		
 		self.height = background_image:getHeight()
@@ -18,7 +18,7 @@ function Floor()
 
 		self.hasElevatorDoor = (math.random(0, 1) == 1)
 		if self.hasElevatorDoor then
-			elevator_door_image = love.graphics.newImage("elevatordoor.png")
+			elevator_door_image = love.graphics.newImage("gfx/elevatordoor.png")
 
 			door_width = elevator_door_image:getWidth()
 			door_x = (floor.width - door_width)
@@ -28,7 +28,7 @@ function Floor()
 		self.hasStairs = (math.random(0, 1) == 1) or (not self.hasElevatorDoor)
 		
 		if self.hasStairs then
-			stairs_image = love.graphics.newImage("sep.stairs.png")
+			stairs_image = love.graphics.newImage("gfx/sep.stairs.png")
 		end
 
 		if math.random(3) == 1 then		

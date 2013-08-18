@@ -3,8 +3,8 @@ function Player()
 	local playerImages = {}
 
   function player:load(...)
-		playerImages.ani_left = love.graphics.newImage('player_left.png')
-		playerImages.ani_right = love.graphics.newImage('player_right.png')
+		playerImages.ani_left = love.graphics.newImage('gfx/player_left.png')
+		playerImages.ani_right = love.graphics.newImage('gfx/player_right.png')
 
 		self.direction = 'right'
     self.speed = 2

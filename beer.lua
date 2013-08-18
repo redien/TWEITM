@@ -7,11 +7,11 @@ function Beer(x, y)
 	
 	function beer:load(...)
 		if math.random(2) == 1 then
-			beer_image = love.graphics.newImage('beer.png')
+			beer_image = love.graphics.newImage('gfx/beer.png')
 		else
-			beer_image = love.graphics.newImage('coffee.png')
+			beer_image = love.graphics.newImage('gfx/coffee.png')
 		end
-		taken_sound = love.audio.newSource("powerup.ogg", static)
+		taken_sound = love.audio.newSource("sfx/powerup.ogg", static)
 	end
 
 	local float_offset_y = 0.0

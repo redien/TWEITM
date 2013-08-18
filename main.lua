@@ -1,4 +1,4 @@
-require 'AnAL'
+require 'libs.AnAL'
 require 'building'
 require 'player'
 require 'background'
@@ -47,8 +47,8 @@ function love.load(...)
   player:load(...)
 	player:setLimit(building:getLimit())
 	
-	won_image = love.graphics.newImage("Youwonthegame.png")
-	lost_image = love.graphics.newImage("youlostthegame.png")
+	won_image = love.graphics.newImage("gfx/Youwonthegame.png")
+	lost_image = love.graphics.newImage("gfx/youlostthegame.png")
 end
 
 function love.update(dt)

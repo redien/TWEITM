@@ -7,8 +7,8 @@ function Background()
 				comet_speed
 
 	function background:load(...)
-		background_image = love.graphics.newImage("Background.png")
-		comet_image = love.graphics.newImage("comet.png")
+		background_image = love.graphics.newImage("gfx/Background.png")
+		comet_image = love.graphics.newImage("gfx/comet.png")
 		comet_scale = 1
 		comet_speed = 0.0025
 	end

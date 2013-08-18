@@ -20,7 +20,7 @@ function Building(number_of_floors)
 			floors[#floors + 1] = floor
 		end
 		
-		next_floor_sound = love.audio.newSource("next_floor.ogg", static)
+		next_floor_sound = love.audio.newSource("sfx/next_floor.ogg", static)
 		
 		building.currentFloor = 0
 		current_floor_offset_y = -number_of_floors * floors[1].height
