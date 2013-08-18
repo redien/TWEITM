@@ -9,7 +9,7 @@ math.random(); math.random(); math.random()
 local states = { start = 0, play = 1, lost = 2, won = 3 }
 
 local game = {
-	version = 0.1,
+	version = 1.0,
 	state = states.start
 }
 
